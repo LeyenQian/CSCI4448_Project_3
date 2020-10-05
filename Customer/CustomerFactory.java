@@ -10,7 +10,7 @@ public class CustomerFactory {
     public static final int TYPE_CASUAL   = 0x1;
     public static final int TYPE_CATERING = 0x2;
 
-    public Customer create(int type) {
+    public static Customer create(int type) {
         if ( type == TYPE_BUSINESS ) return new Business();
         if ( type == TYPE_CASUAL ) return new Casual();
         if ( type == TYPE_CATERING ) return new Catering();
