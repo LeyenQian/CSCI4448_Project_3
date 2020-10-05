@@ -2,7 +2,6 @@ package FoodStore;
 
 import java.util.HashMap;
 
-import Food.Food;
 import Food.FoodFactory;
 
 public class Inventory {
@@ -24,11 +23,11 @@ public class Inventory {
         records.remove(type);
     }
 
-    public Food get_product(int type) {
+    public Product get_product(int type, float price) {
         int quantity = this.check_quantity(type);
         if (quantity > 0) {
             records.replace(type, quantity - 1);
-            return FoodFactory.create(type);
+            return new Product(FoodFactory.create(type), price);
         }
         return null;
     }
