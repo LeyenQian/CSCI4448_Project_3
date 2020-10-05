@@ -1,16 +1,15 @@
 package FoodStore;
 
-import Food.Food;
-
 public class FoodStore {
-    
-    public Food create_product(int type) {
-        return null;
-    }
+    public static final int INVERNTORY_ROLL = 30;
+    public static final float PRICE_EXTRA_SAUCE = 2.0f;
+    public static final float PRICE_EXTRA_TOPPING = 1.5f;
+    public static final float PRICE_EXTRA_FILLING = 3.0f;
 
-    public void remove_product(int type) {
-        return;
-    }
+    private Inventory inventory = new Inventory();
+
+    
+
 
 
 }
