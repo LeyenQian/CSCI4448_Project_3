@@ -1,33 +1,45 @@
 package FoodStore;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import Food.FoodFactory;
 
 public class Inventory {
-    private HashMap<Integer, Integer> records = new HashMap<Integer, Integer>();
-
+    private Map<Integer, Integer> quantity_records = new HashMap<>();
+    private Map<Integer, Float> price_records = new HashMap<>();
+    
     public int check_quantity(int type) {
-        return records.containsKey(type) ? records.get(type) : 0;
+        return quantity_records.containsKey(type) ? quantity_records.get(type) : 0;
     }
 
     public void cover_short_position(int quantity) {
-        records.replaceAll((k, v) -> v == 0 ? quantity : v);
+        quantity_records.replaceAll((k, v) -> v == 0 ? quantity : v);
     }
 
     public void cover_short_position(int type, int quantity) {
-        records.replace(type, quantity);
+        quantity_records.replace(type, quantity);
     }
 
-    public void del_product(int type) {
-        records.remove(type);
+    public void change_price(int type, float price) {
+        price_records.replace(type, price);
     }
 
-    public Product get_product(int type, float price) {
+    public void remove_product(int type) {
+        quantity_records.remove(type);
+        price_records.remove(type);
+    }
+
+    public void insert_product(int type, int quantity, float price) {
+        quantity_records.put(type, quantity);
+        price_records.put(type, price);
+    }
+
+    public Product retrieve_product(int type) {
         int quantity = this.check_quantity(type);
         if (quantity > 0) {
-            records.replace(type, quantity - 1);
-            return new Product(FoodFactory.create(type), price);
+            quantity_records.replace(type, quantity - 1);
+            return new Product(FoodFactory.create(type), price_records.get(type));
         }
         return null;
     }
