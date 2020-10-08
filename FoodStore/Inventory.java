@@ -14,6 +14,15 @@ public class Inventory {
         return quantity_records.containsKey(type) ? quantity_records.get(type) : 0;
     }
 
+    public int check_total_quantity() {
+        int quantity = 0;
+        for ( int value : quantity_records.values() ) {
+            quantity += value;
+        }
+
+        return quantity;
+    }
+
     public void cover_short_position(int quantity) {
         quantity_records.replaceAll((k, v) -> v == 0 ? quantity : v);
     }
