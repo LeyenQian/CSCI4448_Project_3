@@ -6,7 +6,11 @@ import FoodStore.Service.ServiceFactory;
 
 public class FoodStore {
 
+    public static int CODE_NO_ERROR = 0x0;
+    public static int CODE_NO_INVENTORY = 0x1;     // all type of roll are sold out (stroe shall close)
+    public static int CODE_OUT_INVENTORY = 0x2;    // one type of roll is  sold out
     private Inventory inventory = new Inventory();
+    private int last_error_code = CODE_NO_ERROR;
 
     public FoodStore() {
         // initial inventory
@@ -17,20 +21,39 @@ public class FoodStore {
         inventory.insert_product(FoodFactory.TYPE_SPRING_ROLL, Constants.QUANTITY_ROLL, Constants.PRICE_SPRING_ROLL);
     }
 
-    public Product get_product(int type) {
+    public Product get_product(int type) throws Exception {
+        // check whether inventory is not empty
+        if ( inventory.check_total_quantity() == 0 ) {
+            last_error_code = CODE_NO_INVENTORY;
+            throw new Exception("#Exec: all roll are sold out, store is going to close today!");
+        }
+        if ( inventory.check_quantity(type) == 0 ) {
+            last_error_code = CODE_OUT_INVENTORY;
+            throw new Exception("#Exec: selected roll is sold out, please select another roll type!");
+        }
+
         return inventory.retrieve_product(type);
+    }
+
+    public int check_last_error_code() {
+        return last_error_code;
     }
 
     public Product get_service(int type, Product item) {
         return ServiceFactory.create(type, item);
     }
 
-
     public static void main(String[] args) {
         FoodStore store = new FoodStore();
 
         // test before add service
-        Product spring_roll = store.get_product(FoodFactory.TYPE_SPRING_ROLL);
+        Product spring_roll = null;
+        try {
+            spring_roll = store.get_product(FoodFactory.TYPE_SPRING_ROLL);
+        } catch (Exception e) {
+            return;
+        }
+        
         System.out.println(spring_roll.get_description());
         System.out.println(spring_roll.get_price());
         
