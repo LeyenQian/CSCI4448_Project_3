@@ -35,7 +35,7 @@ public class FoodStore {
         return inventory.retrieve_product(type);
     }
 
-    public int check_last_error_code() {
+    public int get_last_error_code() {
         return last_error_code;
     }
 
