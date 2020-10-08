@@ -1,8 +1,10 @@
-package FoodStore;
+package FoodStore.Service;
 
 public class Product {
     private Object item;
     private float price;
+
+    public Product() {}
 
     public Product(Object item, float price) {
         this.set_item(item);
@@ -23,5 +25,9 @@ public class Product {
 
     public Object get_item() {
         return this.item;
+    }
+
+    public String get_description() {
+        return item.toString();
     }
 }

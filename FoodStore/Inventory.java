@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Food.FoodFactory;
+import FoodStore.Service.Product;
 
 public class Inventory {
     private Map<Integer, Integer> quantity_records = new HashMap<>();
