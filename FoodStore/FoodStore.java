@@ -56,6 +56,7 @@ public class FoodStore {
         try {
             spring_roll = store.get_product(FoodFactory.TYPE_SPRING_ROLL);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return;
         }
         
