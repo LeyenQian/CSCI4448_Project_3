@@ -25,6 +25,7 @@ public class FoodStore {
         // check whether inventory is not empty
         if ( inventory.check_total_quantity() == 0 ) {
             last_error_code = CODE_NO_INVENTORY;
+            stop_operation();
             throw new Exception("#Exec: all roll are sold out, store is going to close today!");
         }
         if ( inventory.check_quantity(type) == 0 ) {
@@ -37,6 +38,10 @@ public class FoodStore {
 
     public int get_last_error_code() {
         return last_error_code;
+    }
+
+    public void stop_operation() {
+        inventory.cover_short_position(Constants.QUANTITY_ROLL);
     }
 
     public Product get_service(int type, Product item) {
