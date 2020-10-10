@@ -20,6 +20,11 @@ public class FoodStore {
         inventory.insert_product(FoodFactory.TYPE_PASTRY_ROLL, Constants.QUANTITY_ROLL, Constants.PRICE_PASTRY_ROLL);
         inventory.insert_product(FoodFactory.TYPE_SAUSAGE_ROLL, Constants.QUANTITY_ROLL, Constants.PRICE_SAUSAGE_ROLL);
         inventory.insert_product(FoodFactory.TYPE_SPRING_ROLL, Constants.QUANTITY_ROLL, Constants.PRICE_SPRING_ROLL);
+        this.store_address = store_address;
+    }
+
+    public String get_address() {
+        return this.store_address;
     }
 
     public Product get_product(int type) throws Exception {
