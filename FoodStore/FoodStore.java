@@ -6,13 +6,14 @@ import FoodStore.Service.ServiceFactory;
 
 public class FoodStore {
 
+    private String store_address;
     public static int CODE_NO_ERROR = 0x0;
     public static int CODE_NO_INVENTORY = 0x1;     // all type of roll are sold out (stroe shall close)
     public static int CODE_OUT_INVENTORY = 0x2;    // one type of roll is  sold out
     private Inventory inventory = new Inventory();
     private int last_error_code = CODE_NO_ERROR;
 
-    public FoodStore() {
+    public FoodStore(String store_address) {
         // initial inventory
         inventory.insert_product(FoodFactory.TYPE_EGG_ROLL, Constants.QUANTITY_ROLL, Constants.PRICE_EGG_ROLL);
         inventory.insert_product(FoodFactory.TYPE_JELLY_ROLL, Constants.QUANTITY_ROLL, Constants.PRICE_JELLY_ROLL);
@@ -49,7 +50,7 @@ public class FoodStore {
     }
 
     public static void main(String[] args) {
-        FoodStore store = new FoodStore();
+        FoodStore store = new FoodStore("220 Summit Blvd");
 
         // test before add service
         Product spring_roll = null;

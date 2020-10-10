@@ -26,6 +26,6 @@ public class Main
         Collections.shuffle(customers);
 
         // create food store
-        FoodStore food_store = new FoodStore();
+        FoodStore food_store = new FoodStore("220 Summit Blvd");
     }
 }
