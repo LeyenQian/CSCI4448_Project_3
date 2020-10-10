@@ -1,9 +1,13 @@
 package Customer;
 
+import java.util.ArrayList;
+
 import FoodStore.FoodStore;
+import FoodStore.Service.Product;
 
 public abstract class Customer {
     protected String type = this.getClass().getSimpleName();
+    protected ArrayList<Product> products = new ArrayList<>();
 
     public String toString() {
         return this.hashCode() + " <" + this.type + "> ";
