@@ -5,7 +5,8 @@ import FoodStore.FoodStore;
 
 public class Catering extends Customer {
 
-    public void buy_rolls(FoodStore food_store) {
+    public boolean buy_rolls(FoodStore food_store) {
         
+        return true;
     }
 }

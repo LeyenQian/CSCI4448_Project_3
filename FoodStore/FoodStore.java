@@ -27,6 +27,10 @@ public class FoodStore {
         return this.store_address;
     }
 
+    public void check_inventory() {
+        this.inventory.cover_short_position(Constants.QUANTITY_ROLL);
+    }
+
     public Product get_product(int type) throws Exception {
         // check whether inventory is not empty
         if ( inventory.check_total_quantity() == 0 ) {

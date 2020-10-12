@@ -1,9 +1,9 @@
 package FoodStore;
 
 public class Constants {
-    public static final float PRICE_IDX_SERVICE_FILLING = 0.2f;
-    public static final float PRICE_IDX_SERVICE_SAUCE = 0.3f;
-    public static final float PRICE_IDX_SERVICE_TOPPING = 0.4f;
+    public static final float PRICE_IDX_SERVICE_FILLING = 0.01f;
+    public static final float PRICE_IDX_SERVICE_SAUCE = 0.02f;
+    public static final float PRICE_IDX_SERVICE_TOPPING = 0.015f;
 
     public static final float PRICE_EGG_ROLL     = 5.0f;
     public static final float PRICE_JELLY_ROLL   = 5.5f;

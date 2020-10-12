@@ -27,5 +27,17 @@ public class Main
 
         // create food store
         FoodStore food_store = new FoodStore("220 Summit Blvd");
+
+        for (int day = 1; day <= 1; day ++) {
+            System.out.println(String.format("------------------------Food Stroe at <%s> on <Day %02d>------------------------", food_store.get_address(), day));
+            
+            for (Customer customer : customers) {
+                boolean result = customer.buy_rolls(food_store);
+                customer.check_bill();
+                if (!result) break;
+            }
+
+            food_store.check_inventory();
+        }
     }
 }
