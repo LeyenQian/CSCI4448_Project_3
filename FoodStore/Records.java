@@ -33,9 +33,15 @@ public class Records {
     }
 
     public void summary(int day) {
-        ArrayList<RecordInfo> value = records.get(day);
         HashMap<String, Integer> sum_sell_by_roll = new HashMap<>();
         HashMap<String, Float> sum_pay_by_customer = new HashMap<>();
+
+        this.generate_summary(sum_sell_by_roll, sum_pay_by_customer, day);
+        this.display_summary(sum_sell_by_roll, sum_pay_by_customer);
+    }
+
+    private void generate_summary(HashMap<String, Integer> sum_sell_by_roll, HashMap<String, Float> sum_pay_by_customer, int day) {
+        ArrayList<RecordInfo> value = records.get(day);
 
         for (RecordInfo record_info : value) {
             String customer = record_info.customer_type;
@@ -48,13 +54,15 @@ public class Records {
             if ( !sum_sell_by_roll.containsKey(product) ) sum_sell_by_roll.put(product, 0);
             sum_sell_by_roll.replace(product, sum_sell_by_roll.get(product) + 1);
         }
+    }
 
+    private void display_summary(HashMap<String, Integer> sum_sell_by_roll, HashMap<String, Float> sum_pay_by_customer) {
         System.out.println("\u001B[34m----> Count inventory orders by roll type <----");
         for ( String key : sum_sell_by_roll.keySet() ) {
             System.out.println(String.format("Product: %s   Total sell: %d", key, sum_sell_by_roll.get(key)));
         }
 
-        System.out.println("\n\u001B[35m----> Total payment for orders for the day by customer type <----");
+        System.out.println("\n\u001B[35m----> Total payment for orders by customer type <----");
         float total_bill = 0.0f;
         for ( String key : sum_pay_by_customer.keySet() ) {
             float curr_bill = sum_pay_by_customer.get(key);

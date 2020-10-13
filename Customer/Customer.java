@@ -66,7 +66,7 @@ public abstract class Customer {
 
         try {
             for (int i = 0; i < quantity; i ++) {
-                this.products.add(this.buy_services(food_store, food_store.get_product(type)));
+                this.products.add(this.buy_services(food_store, food_store.get_product(this.type, type)));
             }
         } catch (Exception e) {
             System.out.println(String.format("\u001B[31m Customer: %s   \u001B[37m %s", this.toString(), e.getMessage()));

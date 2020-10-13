@@ -32,7 +32,7 @@ public class FoodStore {
         this.inventory.cover_short_position(Constants.QUANTITY_ROLL);
     }
 
-    public Product get_product(int type) throws Exception {
+    public Product get_product(String customer_type, int type) throws Exception {
         // check whether inventory is not empty
         if ( inventory.check_total_quantity() == 0 ) {
             last_error_code = CODE_NO_INVENTORY;
@@ -72,7 +72,7 @@ public class FoodStore {
         System.out.println(String.format("\u001B[36mEgg     Roll: %d", inventory.check_quantity(FoodFactory.TYPE_EGG_ROLL)));
         System.out.println(String.format("\u001B[36mJelly   Roll: %d", inventory.check_quantity(FoodFactory.TYPE_JELLY_ROLL)));
         System.out.println(String.format("\u001B[36mPastry  Roll: %d", inventory.check_quantity(FoodFactory.TYPE_PASTRY_ROLL)));
-        System.out.println(String.format("\u001B[36mSpring Roll: %d", inventory.check_quantity(FoodFactory.TYPE_SPRING_ROLL)));
+        System.out.println(String.format("\u001B[36mSpring  Roll: %d", inventory.check_quantity(FoodFactory.TYPE_SPRING_ROLL)));
         System.out.println(String.format("\u001B[36mSausage Roll: %d", inventory.check_quantity(FoodFactory.TYPE_SAUSAGE_ROLL)));
         System.out.println("\u001B[36m" + addition_info);
     }
@@ -83,7 +83,7 @@ public class FoodStore {
         // test before add service
         Product spring_roll = null;
         try {
-            spring_roll = store.get_product(FoodFactory.TYPE_SPRING_ROLL);
+            spring_roll = store.get_product("", FoodFactory.TYPE_SPRING_ROLL);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return;
