@@ -3,6 +3,7 @@ package Customer;
 import java.util.ArrayList;
 import java.util.Random;
 
+import Food.FoodFactory;
 import FoodStore.FoodStore;
 import FoodStore.Service.Product;
 import FoodStore.Service.ServiceFactory;
@@ -36,8 +37,23 @@ public abstract class Customer {
 
     public void check_bill() {
         for (Product item : products) {
-            System.out.println(String.format("Customer: %s;   Description: %s;   Price: %f", this.toString(), item.get_description(), item.get_price()));
+            System.out.println(String.format("\u001B[31m Customer: %s   \u001B[33m Price: %f   \u001B[32m Description: %s", this.toString(), item.get_price(), item.get_description()));
         }
+
+        if ( products.size() > 0 ) System.out.println();
+    }
+
+    protected boolean buy_rolls_helper(FoodStore food_store, int type, int quantity) {
+        try {
+            for (int i = 0; i < 2; i ++) {
+                this.products.add(this.buy_services(food_store, food_store.get_product(FoodFactory.TYPE_EGG_ROLL)));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return food_store.get_last_error_code() == FoodStore.CODE_NO_INVENTORY ? false : true;
+        }
+
+        return true;
     }
 
     // each type of customer has different preference on purchasing rolls, they shall be implemented sperately
