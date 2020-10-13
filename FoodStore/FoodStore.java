@@ -35,15 +35,19 @@ public class FoodStore {
         // check whether inventory is not empty
         if ( inventory.check_total_quantity() == 0 ) {
             last_error_code = CODE_NO_INVENTORY;
-            stop_operation();
             throw new Exception("#Exec: all roll are sold out, store is going to close today!");
         }
+
         if ( inventory.check_quantity(type) == 0 ) {
             last_error_code = CODE_OUT_INVENTORY;
-            throw new Exception("#Exec: selected roll is sold out, please select another roll type!");
+            throw new Exception("#Exec: selected roll is sold out!");
         }
 
         return inventory.retrieve_product(type);
+    }
+
+    public boolean check_availability(int type, int quantity) {
+        return inventory.check_quantity(type) >= quantity;
     }
 
     public int get_last_error_code() {

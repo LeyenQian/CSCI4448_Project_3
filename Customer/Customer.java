@@ -1,6 +1,7 @@
 package Customer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import Food.FoodFactory;
@@ -11,9 +12,22 @@ import FoodStore.Service.ServiceFactory;
 public abstract class Customer {
     protected String type = this.getClass().getSimpleName();
     protected ArrayList<Product> products = new ArrayList<>();
+    protected ArrayList<Integer> roll_types = new ArrayList<>();
     private static final int MAX_SERVICE_SAUCES = 3;
     private static final int MAX_SERVICE_FILLING = 1;
     private static final int MAX_SERVICE_TOOPING = 2;
+
+    public Customer() {
+        // add all the roll type into array
+        roll_types.add(FoodFactory.TYPE_EGG_ROLL);
+        roll_types.add(FoodFactory.TYPE_JELLY_ROLL);
+        roll_types.add(FoodFactory.TYPE_PASTRY_ROLL);
+        roll_types.add(FoodFactory.TYPE_SAUSAGE_ROLL);
+        roll_types.add(FoodFactory.TYPE_SPRING_ROLL);
+
+        // shuffle the order of roll types, so we can simply pop items later.
+        Collections.shuffle(roll_types);
+    }
 
     public String toString() {
         return this.hashCode() + " <" + this.type + "> ";
@@ -40,16 +54,19 @@ public abstract class Customer {
             System.out.println(String.format("\u001B[31m Customer: %s   \u001B[33m Price: %f   \u001B[32m Description: %s", this.toString(), item.get_price(), item.get_description()));
         }
 
-        if ( products.size() > 0 ) System.out.println();
+        System.out.println();
     }
 
-    protected boolean buy_rolls_helper(FoodStore food_store, int type, int quantity) {
+    protected boolean buy_rolls_helper(FoodStore food_store, int type, int quantity, boolean strict) {
+        // even through there is no enough rolls, still return true, only return false for CODE_NO_INVENTORY
+        if ( strict && !food_store.check_availability(type, quantity)) return true;
+
         try {
-            for (int i = 0; i < 2; i ++) {
-                this.products.add(this.buy_services(food_store, food_store.get_product(FoodFactory.TYPE_EGG_ROLL)));
+            for (int i = 0; i < quantity; i ++) {
+                this.products.add(this.buy_services(food_store, food_store.get_product(type)));
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(String.format("\u001B[31m Customer: %s   \u001B[37m %s", this.toString(), e.getMessage()));
             return food_store.get_last_error_code() == FoodStore.CODE_NO_INVENTORY ? false : true;
         }
 

@@ -16,20 +16,25 @@ public class Main
         return new Random().nextInt(upper_bound - lower_bound + 1) + lower_bound;
     }
 
-    public static void main(String[] args)
-    {
-        // create customers and shuffle customer order in place
+    public static ArrayList<Customer> generate_customers() {
         ArrayList<Customer> customers = new ArrayList<>();
         customers.addAll(CustomerFactory.create(CustomerFactory.TYPE_CASUAL, get_random_number(1, MAX_CUSTOMER_CASUAL)));
         customers.addAll(CustomerFactory.create(CustomerFactory.TYPE_BUSINESS, get_random_number(1, MAX_CUSTOMER_BUSINESS)));
         customers.addAll(CustomerFactory.create(CustomerFactory.TYPE_CATERING, get_random_number(1, MAX_CUSTOMER_CATERING)));
         Collections.shuffle(customers);
+        return customers;
+    }
 
+    public static void main(String[] args)
+    {
         // create food store
         FoodStore food_store = new FoodStore("220 Summit Blvd");
 
-        for (int day = 1; day <= 1; day ++) {
-            System.out.println(String.format("------------------------Food Stroe at <%s> on <Day %02d>------------------------", food_store.get_address(), day));
+        for (int day = 1; day <= 20; day ++) {
+            // create customers and shuffle customer order in place
+            ArrayList<Customer> customers = generate_customers();
+
+            System.out.println(String.format("\u001B[37m----------------------------------------Food Stroe at <%s> on <Day %02d>----------------------------------------", food_store.get_address(), day));
             
             for (Customer customer : customers) {
                 boolean result = customer.buy_rolls(food_store);
