@@ -55,6 +55,10 @@ public class FoodStore {
         records.summary(day);
     }
 
+    public void summary_all(int days) {
+        records.summary_all(days);
+    }
+
     public boolean check_availability(int type, int quantity) {
         return inventory.check_quantity(type) >= quantity;
     }

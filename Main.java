@@ -29,8 +29,9 @@ public class Main
     {
         // create food store
         FoodStore food_store = new FoodStore("220 Summit Blvd");
+        int total_days = 2;
 
-        for (int day = 1; day <= 1; day ++) {
+        for (int day = 1; day <= total_days; day ++) {
             // create customers and shuffle customer order in place
             ArrayList<Customer> customers = generate_customers();
 
@@ -45,5 +46,8 @@ public class Main
             food_store.show_inventory("********************************* Day  End  Inventory *********************************");
             food_store.check_inventory();
         }
+
+        System.out.println(String.format("\n\u001B[37m---------------------------------------- Summary for last %02d Days ----------------------------------------", total_days));
+        food_store.summary_all(2);
     }
 }

@@ -40,6 +40,17 @@ public class Records {
         this.display_summary(sum_sell_by_roll, sum_pay_by_customer);
     }
 
+    public void summary_all(int total_days) {
+        HashMap<String, Integer> sum_sell_by_roll = new HashMap<>();
+        HashMap<String, Float> sum_pay_by_customer = new HashMap<>();
+
+        for (int day = 1; day <= total_days; day ++) {
+            this.generate_summary(sum_sell_by_roll, sum_pay_by_customer, day);
+        }
+
+        this.display_summary(sum_sell_by_roll, sum_pay_by_customer);
+    }
+
     private void generate_summary(HashMap<String, Integer> sum_sell_by_roll, HashMap<String, Float> sum_pay_by_customer, int day) {
         ArrayList<RecordInfo> value = records.get(day);
 
