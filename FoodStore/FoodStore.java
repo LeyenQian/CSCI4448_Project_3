@@ -11,6 +11,7 @@ public class FoodStore {
     public static int CODE_NO_INVENTORY = 0x1;     // all type of roll are sold out (stroe shall close)
     public static int CODE_OUT_INVENTORY = 0x2;    // one type of roll is  sold out
     private Inventory inventory = new Inventory();
+    private Records records = new Records();
     private int last_error_code = CODE_NO_ERROR;
 
     public FoodStore(String store_address) {
@@ -46,16 +47,20 @@ public class FoodStore {
         return inventory.retrieve_product(type);
     }
 
+    public void check_bill(String customer_type, String product_type, float price, int timestamp) {
+        records.add_record(customer_type, product_type, price, timestamp);
+    }
+
+    public void summary_day(int day) {
+        records.summary(day);
+    }
+
     public boolean check_availability(int type, int quantity) {
         return inventory.check_quantity(type) >= quantity;
     }
 
     public int get_last_error_code() {
         return last_error_code;
-    }
-
-    public void stop_operation() {
-        inventory.cover_short_position(Constants.QUANTITY_ROLL);
     }
 
     public Product get_service(int type, Product item) {

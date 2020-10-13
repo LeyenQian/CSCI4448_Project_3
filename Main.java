@@ -7,7 +7,7 @@ import Customer.CustomerFactory;
 import FoodStore.FoodStore;
 
 public class Main
-{    
+{
     public static final int MAX_CUSTOMER_CASUAL   = 12;
     public static final int MAX_CUSTOMER_BUSINESS = 3;
     public static final int MAX_CUSTOMER_CATERING = 3;
@@ -30,7 +30,7 @@ public class Main
         // create food store
         FoodStore food_store = new FoodStore("220 Summit Blvd");
 
-        for (int day = 1; day <= 30; day ++) {
+        for (int day = 1; day <= 1; day ++) {
             // create customers and shuffle customer order in place
             ArrayList<Customer> customers = generate_customers();
 
@@ -38,9 +38,10 @@ public class Main
             food_store.show_inventory("********************************* Day Begin Inventory *********************************");
             for (Customer customer : customers) {
                 boolean result = customer.buy_rolls(food_store);
-                customer.check_bill();
+                customer.check_bill(food_store, day);
                 if (!result) break;
             }
+            food_store.summary_day(day);
             food_store.show_inventory("********************************* Day  End  Inventory *********************************");
             food_store.check_inventory();
         }

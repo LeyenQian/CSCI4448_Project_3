@@ -7,6 +7,7 @@ import java.util.Random;
 import Food.FoodFactory;
 import FoodStore.FoodStore;
 import FoodStore.Service.Product;
+import FoodStore.Service.ServiceDecorator;
 import FoodStore.Service.ServiceFactory;
 
 public abstract class Customer {
@@ -49,11 +50,13 @@ public abstract class Customer {
         return item;
     }
 
-    public void check_bill() {
-        for (Product item : products) {
-            System.out.println(String.format("\u001B[31m Customer: %s   \u001B[33m Price: %f   \u001B[32m Description: %s", this.toString(), item.get_price(), item.get_description()));
+    public void check_bill(FoodStore food_store, int timestamp) {
+        for (Product product : products) {
+            System.out.println(String.format("\u001B[31m Customer: %s   \u001B[33m Price: %f   \u001B[32m Description: %s", this.toString(), product.get_price(), product.get_description()));
+            
+            String name = product instanceof ServiceDecorator ? ((Product)((ServiceDecorator)product).get_original_product()).get_description() : product.get_description();
+            food_store.check_bill(this.type, name, product.get_price(), timestamp);
         }
-
         System.out.println();
     }
 
