@@ -30,7 +30,7 @@ public class Main
         // create food store
         FoodStore food_store = new FoodStore("220 Summit Blvd");
 
-        for (int day = 1; day <= 20; day ++) {
+        for (int day = 1; day <= 30; day ++) {
             // create customers and shuffle customer order in place
             ArrayList<Customer> customers = generate_customers();
 
