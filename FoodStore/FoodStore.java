@@ -62,6 +62,16 @@ public class FoodStore {
         return ServiceFactory.create(type, item);
     }
 
+    public void show_inventory(String addition_info) {
+        System.out.println("\u001B[36m" + addition_info);
+        System.out.println(String.format("\u001B[36mEgg     Roll: %d", inventory.check_quantity(FoodFactory.TYPE_EGG_ROLL)));
+        System.out.println(String.format("\u001B[36mJelly   Roll: %d", inventory.check_quantity(FoodFactory.TYPE_JELLY_ROLL)));
+        System.out.println(String.format("\u001B[36mPastry  Roll: %d", inventory.check_quantity(FoodFactory.TYPE_PASTRY_ROLL)));
+        System.out.println(String.format("\u001B[36mSpring Roll: %d", inventory.check_quantity(FoodFactory.TYPE_SPRING_ROLL)));
+        System.out.println(String.format("\u001B[36mSausage Roll: %d", inventory.check_quantity(FoodFactory.TYPE_SAUSAGE_ROLL)));
+        System.out.println("\u001B[36m" + addition_info);
+    }
+
     public static void main(String[] args) {
         FoodStore store = new FoodStore("220 Summit Blvd");
 

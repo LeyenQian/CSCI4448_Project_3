@@ -34,14 +34,14 @@ public class Main
             // create customers and shuffle customer order in place
             ArrayList<Customer> customers = generate_customers();
 
-            System.out.println(String.format("\u001B[37m----------------------------------------Food Stroe at <%s> on <Day %02d>----------------------------------------", food_store.get_address(), day));
-            
+            System.out.println(String.format("\n\u001B[37m----------------------------------------Food Stroe at <%s> on <Day %02d>----------------------------------------", food_store.get_address(), day));
+            food_store.show_inventory("********************************* Day Begin Inventory *********************************");
             for (Customer customer : customers) {
                 boolean result = customer.buy_rolls(food_store);
                 customer.check_bill();
                 if (!result) break;
             }
-
+            food_store.show_inventory("********************************* Day  End  Inventory *********************************");
             food_store.check_inventory();
         }
     }
