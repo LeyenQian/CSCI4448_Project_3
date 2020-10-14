@@ -4,6 +4,10 @@
  - Email: jiqi2811@colorado.edu</br>
  - Team Members: Yi Hou (109288627), Ziyue Guo (107037369)
 
+### Environment
+ - Java 14
+ - Mac OS & Windows
+
 ### Files Description
  - Main.java</br>
 the entry point of the program.
