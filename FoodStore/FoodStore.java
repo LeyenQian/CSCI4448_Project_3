@@ -13,6 +13,7 @@ public class FoodStore {
     private Inventory inventory = new Inventory();
     private Records records = new Records();
     private int last_error_code = CODE_NO_ERROR;
+    private int timestamp;
 
     public FoodStore(String store_address) {
         // initial inventory
@@ -32,6 +33,10 @@ public class FoodStore {
         this.inventory.cover_short_position(Constants.QUANTITY_ROLL);
     }
 
+    public void set_timestamp(int timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public Product get_product(String customer_type, int type) throws Exception {
         // check whether inventory is not empty
         if ( inventory.check_total_quantity() == 0 ) {
@@ -41,6 +46,7 @@ public class FoodStore {
 
         if ( inventory.check_quantity(type) == 0 ) {
             last_error_code = CODE_OUT_INVENTORY;
+            records.add_outage_record(customer_type, timestamp);
             throw new Exception("#Exec: selected roll is sold out!");
         }
 

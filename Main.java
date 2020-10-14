@@ -34,6 +34,7 @@ public class Main
         for (int day = 1; day <= total_days; day ++) {
             // create customers and shuffle customer order in place
             ArrayList<Customer> customers = generate_customers();
+            food_store.set_timestamp(day);
 
             System.out.println(String.format("\n\u001B[37m----------------------------------------Food Stroe at <%s> on <Day %02d>----------------------------------------", food_store.get_address(), day));
             food_store.show_inventory("********************************* Day Begin Inventory *********************************");
