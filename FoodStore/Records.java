@@ -33,6 +33,17 @@ public class Records {
         value.add(new RecordInfo(customer_type, product_type, price));
     }
 
+    public int get_outage_count() {
+        int total_count = 0;
+        for (int day : outage_records.keySet() ) {
+            for (String customer : outage_records.get(day).keySet()) {
+                total_count += outage_records.get(day).get(customer);
+            }
+        }
+
+        return total_count;
+    }
+
     public void add_outage_record(String customer_type, int timestamp){
         HashMap<String, Integer> value = null;
 
@@ -50,6 +61,10 @@ public class Records {
         } else {
             value.replace(customer_type, value.get(customer_type) + 1);
         }
+    }
+
+    public HashMap<Integer, ArrayList<RecordInfo>> get_record() {
+        return this.records;
     }
 
     public void summary(int day) {

@@ -47,6 +47,7 @@ public class FoodStore {
         // check whether inventory is not empty
         if ( inventory.check_total_quantity() == 0 ) {
             last_error_code = CODE_NO_INVENTORY;
+            records.add_outage_record(customer_type, timestamp);
             throw new Exception("#Exec: all roll are sold out, store is going to close today!");
         }
 
@@ -61,6 +62,10 @@ public class FoodStore {
 
     public void check_bill(String customer_type, String product_type, float price, int timestamp) {
         records.add_record(customer_type, product_type, price, timestamp);
+    }
+
+    public Records get_records() {
+        return this.records;
     }
 
     public void summary_day(int day) {
