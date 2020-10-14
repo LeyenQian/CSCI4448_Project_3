@@ -36,7 +36,7 @@ public class Main
             ArrayList<Customer> customers = generate_customers();
             food_store.set_timestamp(day);
 
-            System.out.println(String.format("\n\u001B[37m----------------------------------------Food Stroe at <%s> on <Day %02d>----------------------------------------", food_store.get_address(), day));
+            System.out.println(String.format("\n\u001B[37m----------------------------------------Food Store at <%s> on <Day %02d>----------------------------------------", food_store.get_address(), day));
             food_store.show_inventory("********************************* Day Begin Inventory *********************************");
             for (Customer customer : customers) {
                 boolean result = customer.buy_rolls(food_store);
