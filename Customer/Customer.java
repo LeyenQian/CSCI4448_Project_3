@@ -62,7 +62,11 @@ public abstract class Customer {
 
     protected boolean buy_rolls_helper(FoodStore food_store, int type, int quantity, boolean strict) {
         // even through there is no enough rolls, still return true, only return false for CODE_NO_INVENTORY
-        if ( strict && !food_store.check_availability(type, quantity)) return true;
+        // this is only for business customer, no enough quantity shall also be counted as inventory outage
+        if ( strict && !food_store.check_availability(type, quantity)) {
+            food_store.cancel_order(this.type);
+            return true;
+        }
 
         try {
             for (int i = 0; i < quantity; i ++) {

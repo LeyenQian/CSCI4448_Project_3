@@ -29,7 +29,7 @@ public class Main
     {
         // create food store
         FoodStore food_store = new FoodStore("220 Summit Blvd");
-        int total_days = 2;
+        int total_days = 30;
 
         for (int day = 1; day <= total_days; day ++) {
             // create customers and shuffle customer order in place
@@ -49,6 +49,6 @@ public class Main
         }
 
         System.out.println(String.format("\n\u001B[37m---------------------------------------- Summary for last %02d Days ----------------------------------------", total_days));
-        food_store.summary_all(2);
+        food_store.summary_all(total_days);
     }
 }

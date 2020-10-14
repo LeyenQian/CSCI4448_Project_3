@@ -37,6 +37,12 @@ public class FoodStore {
         this.timestamp = timestamp;
     }
 
+    public void cancel_order(String customer_type) {
+        // customer may not take the order, if the quantity cannot meet their requirement
+        // in this case, only business will call this function
+        records.add_outage_record(customer_type, timestamp);
+    }
+
     public Product get_product(String customer_type, int type) throws Exception {
         // check whether inventory is not empty
         if ( inventory.check_total_quantity() == 0 ) {
