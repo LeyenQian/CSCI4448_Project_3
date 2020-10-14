@@ -5,6 +5,7 @@ import java.util.Random;
 import Customer.Customer;
 import Customer.CustomerFactory;
 import FoodStore.FoodStore;
+import Test.MyUnitTest;
 
 public class Main
 {
@@ -27,6 +28,19 @@ public class Main
 
     public static void main(String[] args)
     {
+        // test
+        MyUnitTest test = new MyUnitTest();
+        test.test_customer_factory();
+        test.test_food_factory();
+        test.test_service_factory();
+        test.test_records();
+        test.test_outage_records();
+        test.test_inventory();
+        test.test_food_store_config();
+        test.test_food_store_retrieve_single_roll_type();
+        test.test_food_store_retrieve_all_roll_type();
+        test.test_food_store_cover_shortage();
+
         // create food store
         FoodStore food_store = new FoodStore("220 Summit Blvd");
         int total_days = 30;
